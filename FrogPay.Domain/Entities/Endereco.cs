@@ -1,7 +1,10 @@
-﻿namespace FrogPay.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FrogPay.Domain.Entities
 {
     public class Endereco
     {
+        [Key]
         public Guid IdPessoa { get; set; }
         public required Pessoa Pessoa { get; set; }
         public required string UFEstado { get; set; }

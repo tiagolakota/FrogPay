@@ -1,6 +1,5 @@
 ﻿using FrogPay.Application.Interfaces.Repositories;
 using FrogPay.Domain.Entities;
-using FrogPay.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrogPay.Infrastructure.Data.Repositories

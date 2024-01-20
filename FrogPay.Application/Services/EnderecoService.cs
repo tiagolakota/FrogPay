@@ -1,4 +1,4 @@
-﻿using FrogPay.Application.Interfaces;
+﻿using FrogPay.Application.Interfaces.Services;
 using FrogPay.Application.Interfaces.Repositories;
 using FrogPay.Domain.Entities;
 

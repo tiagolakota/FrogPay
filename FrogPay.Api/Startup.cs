@@ -1,11 +1,14 @@
 ﻿using FrogPay.Application.Interfaces.Repositories;
-using FrogPay.Infrastructure.Data.Contexts;
 using FrogPay.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FrogPay.Application.Interfaces.Services;
+using FrogPay.Application.Services;
+using FrogPay.Application.AutoMapper;
+using FrogPay.Infrastructure;
 
 namespace SlnFrogPay
 {
@@ -20,7 +23,6 @@ namespace SlnFrogPay
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configuração do Entity Framework Core com PostgreSQL
             services.AddDbContext<FrogPayContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("FrogPayConnection")));
 
@@ -29,6 +31,8 @@ namespace SlnFrogPay
             services.AddScoped<ILojaRepository, LojaRepository>();
             services.AddScoped<IDadosBancariosRepository, DadosBancariosRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IPessoaService, PessoaService>();
+
 
             // Configuração de CORS (exemplo para qualquer origem)
             services.AddCors(options =>
@@ -63,16 +67,19 @@ namespace SlnFrogPay
                 };
             });
 
-            // AutoMapper
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapperProfile), typeof(Startup));
 
             // Outras configurações de serviços...
 
             services.AddControllers();
         }
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<FrogPayContext>().Database.Migrate();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

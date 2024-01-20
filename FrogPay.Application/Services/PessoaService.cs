@@ -1,5 +1,5 @@
-﻿using FrogPay.Application.Interfaces;
-using FrogPay.Application.Interfaces.Repositories;
+﻿using FrogPay.Application.Interfaces.Repositories;
+using FrogPay.Application.Interfaces.Services;
 using FrogPay.Domain.Entities;
 
 namespace FrogPay.Application.Services
