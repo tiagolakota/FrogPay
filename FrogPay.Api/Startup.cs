@@ -3,17 +3,20 @@ using FrogPay.Infrastructure.Data.Contexts;
 using FrogPay.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace SlnFrogPay
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -37,7 +40,27 @@ namespace SlnFrogPay
             // Configuração do Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SlnFrogPay", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrogPay", Version = "v1" });
+            });
+
+            // Configuração para adicionar autenticação JWT
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "your_issuer",
+                    ValidAudience = "your_audience",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+                };
             });
 
             // Outras configurações de serviços...
@@ -51,7 +74,7 @@ namespace SlnFrogPay
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SlnFrogPay v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrogPay v1"));
             }
 
             app.UseHttpsRedirection();
@@ -61,9 +84,9 @@ namespace SlnFrogPay
             // Ativar CORS (exemplo para qualquer origem)
             app.UseCors("AllowAnyOrigin");
 
-            // Ativar autenticação JWT (se necessário)
-            // app.UseAuthentication();
-            // app.UseAuthorization();
+            // Ativar autenticação JWT
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
