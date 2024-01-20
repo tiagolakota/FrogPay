@@ -1,4 +1,4 @@
-﻿namespace FrogPay.Application.Interfaces
+﻿namespace FrogPay.Application.Interfaces.Services
 {
     internal interface IDadosBancariosService
     {
