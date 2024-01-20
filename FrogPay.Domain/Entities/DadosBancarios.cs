@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FrogPay.Domain.Entities
+﻿namespace FrogPay.Domain.Entities
 {
-    internal class DadosBancarios
+    public class DadosBancarios
     {
+        public Guid IdPessoa { get; set; }
+        public required Pessoa Pessoa { get; set; }
+        public required string CodigoBanco { get; set; }
+        public required string Agencia { get; set; }
+        public required string DigitoConta { get; set; }
     }
 }

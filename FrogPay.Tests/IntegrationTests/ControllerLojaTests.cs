@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FrogPay.Tests.IntegrationTests
+﻿namespace FrogPay.Tests.IntegrationTests
 {
     internal class ControllerLojaTests
     {
