@@ -63,6 +63,8 @@ namespace SlnFrogPay
                 };
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
             // Outras configurações de serviços...
 
             services.AddControllers();
