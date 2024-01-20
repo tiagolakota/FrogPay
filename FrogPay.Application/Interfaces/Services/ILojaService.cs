@@ -1,7 +1,7 @@
 ﻿using FrogPay.Application.Models;
 using FrogPay.Domain.Entities;
 
-namespace FrogPay.Application.Interfaces
+namespace FrogPay.Application.Interfaces.Services
 {
     public interface ILojaService
     {

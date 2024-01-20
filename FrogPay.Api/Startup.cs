@@ -63,6 +63,7 @@ namespace SlnFrogPay
                 };
             });
 
+            // AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
             // Outras configurações de serviços...
@@ -90,9 +91,12 @@ namespace SlnFrogPay
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Configure as rotas da API
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "api/{controller}/{action=Index}/{id?}");
             });
         }
     }
