@@ -63,9 +63,13 @@ namespace FrogPay.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Pessoa>> ObterPorNomeAsync(string nome)
         {
-            return await _context.Pessoas
-                .Where(p => p.Nome.Contains(nome, StringComparison.Ordinal))
-                .ToListAsync();
+            // Carregar todos os registros da tabela para a memória
+            var pessoas = await _context.Pessoas.AsNoTracking().ToListAsync();
+
+            // Aplicar o filtro em memória
+            var result = pessoas.Where(p => p.Nome.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return result;
         }
     }
 }

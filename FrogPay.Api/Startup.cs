@@ -2,6 +2,7 @@
 using FrogPay.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -36,20 +37,12 @@ namespace SlnFrogPay
             services.AddScoped<ILojaService, LojaService>();
             services.AddScoped<IDadosBancariosService, DadosBancariosService>();
 
-            // Configuração de CORS (exemplo para qualquer origem)
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAnyOrigin",
-                    builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            });
+            // Configuração de Identity
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<FrogPayContext>()
+                .AddDefaultTokenProviders();
 
-            // Configuração do Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrogPay", Version = "v1" });
-            });
-
-            // Configuração para adicionar autenticação JWT
+            // Configuração de JWT
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -63,7 +56,7 @@ namespace SlnFrogPay
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ClockSkew = TimeSpan.FromMinutes(5), // Configura a tolerância de expiração para 5 minutos
+                    ClockSkew = TimeSpan.FromMinutes(5),
                     ValidIssuer = Configuration["Jwt:Issuer"],
                     ValidAudience = Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
@@ -71,6 +64,34 @@ namespace SlnFrogPay
             });
 
             services.AddAutoMapper(typeof(AutoMapperProfile), typeof(Startup));
+
+            // Configuração do Swagger com suporte à autenticação JWT
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrogPay", Version = "v1" });
+
+                // Adicione essa linha para incluir a autenticação JWT no Swagger
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+            });
 
             // Outras configurações de serviços...
 
@@ -88,15 +109,21 @@ namespace SlnFrogPay
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrogPay v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrogPay v1");
+                    // Adicione essa linha para permitir a autenticação no Swagger UI
+                    c.OAuthClientId("swagger");
+                    c.OAuthClientSecret("swagger_secret");
+                    c.OAuthUsePkce();
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            // Ativar CORS (exemplo para qualquer origem)
-            app.UseCors("AllowAnyOrigin");
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             // Ativar autenticação JWT
             app.UseAuthentication();

@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Infrastructure", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Tests", "FrogPay.Tests\FrogPay.Tests.csproj", "{CBD5F4AB-2EA2-4E23-AB71-89CE5C986EE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Common", "FrogPay.Common\FrogPay.Common.csproj", "{42CC6ED1-615A-40C7-AD25-3093DB062ED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Common", "FrogPay.Common\FrogPay.Common.csproj", "{42CC6ED1-615A-40C7-AD25-3093DB062ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.JwtTokenGenerationConsoleApp", "FrogPay.JwtTokenGenerationConsoleApp\FrogPay.JwtTokenGenerationConsoleApp.csproj", "{7F0DE160-6256-4F8D-82A9-9DC1370C2067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0DE160-6256-4F8D-82A9-9DC1370C2067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0DE160-6256-4F8D-82A9-9DC1370C2067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0DE160-6256-4F8D-82A9-9DC1370C2067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0DE160-6256-4F8D-82A9-9DC1370C2067}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

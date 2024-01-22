@@ -3,10 +3,12 @@ using FrogPay.Application.Interfaces.Services;
 using FrogPay.Application.Models;
 using FrogPay.Common;
 using FrogPay.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrogPay.Api.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PessoaController : ControllerBase
