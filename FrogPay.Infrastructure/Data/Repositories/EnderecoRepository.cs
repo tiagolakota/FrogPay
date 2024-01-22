@@ -52,5 +52,18 @@ namespace FrogPay.Infrastructure.Data.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Endereco>> ObterTodosAsync()
+        {
+            return await _context.Enderecos.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Endereco>> ObterTodosPaginadoAsync(int page, int pageSize)
+        {
+            return await _context.Enderecos
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FrogPay.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationPostgres : Migration
+    public partial class FrogPayDBMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

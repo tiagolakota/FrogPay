@@ -6,7 +6,7 @@ namespace FrogPay.Application.Interfaces.Services
     {
         Task<DadosBancarios> ObterPorIdPessoaAsync(Guid idPessoa);
         Task AdicionarAsync(DadosBancarios dadosBancarios);
-        Task AtualizarAsync(Guid idPessoa, DadosBancarios dadosBancarios);
-        Task RemoverAsync(Guid idPessoa);
+        Task AtualizarAsync(DadosBancarios dadosBancarios);
+        Task RemoverPorIdPessoaAsync(Guid idPessoa);
     }
 }

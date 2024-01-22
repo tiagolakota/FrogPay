@@ -24,9 +24,9 @@ namespace FrogPay.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task AtualizarAsync(Guid idPessoa, DadosBancarios dadosBancarios)
+        public async Task AtualizarAsync(DadosBancarios dadosBancarios)
         {
-            var dadosExistente = await _context.DadosBancarios.FindAsync(idPessoa);
+            var dadosExistente = await _context.DadosBancarios.FindAsync(dadosBancarios.IdPessoa);
 
             if (dadosExistente != null)
             {

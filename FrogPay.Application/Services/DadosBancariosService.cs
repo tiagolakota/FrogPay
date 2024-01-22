@@ -1,6 +1,6 @@
-﻿using FrogPay.Application.Interfaces.Services;
+﻿using FrogPay.Domain.Entities;
 using FrogPay.Application.Interfaces.Repositories;
-using FrogPay.Domain.Entities;
+using FrogPay.Application.Interfaces.Services;
 
 namespace FrogPay.Application.Services
 {
@@ -10,7 +10,7 @@ namespace FrogPay.Application.Services
 
         public DadosBancariosService(IDadosBancariosRepository dadosBancariosRepository)
         {
-            _dadosBancariosRepository = dadosBancariosRepository;
+            _dadosBancariosRepository = dadosBancariosRepository ?? throw new ArgumentNullException(nameof(dadosBancariosRepository));
         }
 
         public async Task<DadosBancarios> ObterPorIdPessoaAsync(Guid idPessoa)
@@ -23,12 +23,12 @@ namespace FrogPay.Application.Services
             await _dadosBancariosRepository.AdicionarAsync(dadosBancarios);
         }
 
-        public async Task AtualizarAsync(Guid idPessoa, DadosBancarios dadosBancarios)
+        public async Task AtualizarAsync(DadosBancarios dadosBancarios)
         {
-            await _dadosBancariosRepository.AtualizarAsync(idPessoa, dadosBancarios);
+            await _dadosBancariosRepository.AtualizarAsync(dadosBancarios);
         }
 
-        public async Task RemoverAsync(Guid idPessoa)
+        public async Task RemoverPorIdPessoaAsync(Guid idPessoa)
         {
             await _dadosBancariosRepository.RemoverAsync(idPessoa);
         }

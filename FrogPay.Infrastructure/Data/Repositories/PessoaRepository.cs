@@ -23,15 +23,20 @@ namespace FrogPay.Infrastructure.Data.Repositories
             return await _context.Pessoas.FindAsync(id);
         }
 
+        public async Task<Pessoa> ObterPorCpfAsync(string cpf)
+        {
+            return await _context.Pessoas.FirstOrDefaultAsync(p => p.CPF == cpf);
+        }
+
         public async Task AdicionarAsync(Pessoa pessoa)
         {
             await _context.Pessoas.AddAsync(pessoa);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AtualizarAsync(Guid id, Pessoa pessoa)
+        public async Task AtualizarAsync(string cpf, Pessoa pessoa)
         {
-            var pessoaExistente = await _context.Pessoas.FindAsync(id);
+            var pessoaExistente = await _context.Pessoas.FirstOrDefaultAsync(p => p.CPF == cpf);
 
             if (pessoaExistente != null)
             {
@@ -45,15 +50,22 @@ namespace FrogPay.Infrastructure.Data.Repositories
             }
         }
 
-        public async Task RemoverAsync(Guid id)
+        public async Task RemoverAsync(string cpf)
         {
-            var pessoa = await _context.Pessoas.FindAsync(id);
+            var pessoa = await _context.Pessoas.FirstOrDefaultAsync(p => p.CPF == cpf);
 
             if (pessoa != null)
             {
                 _context.Pessoas.Remove(pessoa);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<IEnumerable<Pessoa>> ObterPorNomeAsync(string nome)
+        {
+            return await _context.Pessoas
+                .Where(p => p.Nome.Contains(nome, StringComparison.Ordinal))
+                .ToListAsync();
         }
     }
 }

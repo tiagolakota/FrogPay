@@ -1,5 +1,4 @@
-﻿using FrogPay.Application.Models;
-using FrogPay.Domain.Entities;
+﻿using FrogPay.Domain.Entities;
 
 namespace FrogPay.Application.Interfaces.Services
 {

@@ -32,7 +32,9 @@ namespace SlnFrogPay
             services.AddScoped<IDadosBancariosRepository, DadosBancariosRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<IPessoaService, PessoaService>();
-
+            services.AddScoped<IEnderecoService, EnderecoService>();
+            services.AddScoped<ILojaService, LojaService>();
+            services.AddScoped<IDadosBancariosService, DadosBancariosService>();
 
             // Configuração de CORS (exemplo para qualquer origem)
             services.AddCors(options =>
@@ -61,9 +63,10 @@ namespace SlnFrogPay
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "your_issuer",
-                    ValidAudience = "your_audience",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+                    ClockSkew = TimeSpan.FromMinutes(5), // Configura a tolerância de expiração para 5 minutos
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
 
@@ -73,6 +76,7 @@ namespace SlnFrogPay
 
             services.AddControllers();
         }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())

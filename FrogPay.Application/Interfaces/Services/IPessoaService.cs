@@ -1,5 +1,4 @@
-﻿using FrogPay.Application.Models;
-using FrogPay.Domain.Entities;
+﻿using FrogPay.Domain.Entities;
 
 namespace FrogPay.Application.Interfaces.Services
 {
@@ -7,8 +6,10 @@ namespace FrogPay.Application.Interfaces.Services
     {
         Task<IEnumerable<Pessoa>> ObterTodosAsync();
         Task<Pessoa> ObterPorIdAsync(Guid id);
+        Task<IEnumerable<Pessoa>> ObterPorNomeAsync(string nome);
+        Task<Pessoa> ObterPorCpfAsync(string cpf);
         Task AdicionarAsync(Pessoa pessoa);
-        Task AtualizarAsync(Guid id, Pessoa pessoa);
-        Task RemoverAsync(Guid id);
+        Task AtualizarAsync(string cpf, Pessoa pessoa);
+        Task RemoverAsync(string cpf);
     }
 }

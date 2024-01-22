@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FrogPay.Infrastructure.Migrations
 {
     [DbContext(typeof(FrogPayContext))]
-    [Migration("20240120101501_MigrationPostgres")]
-    partial class MigrationPostgres
+    [Migration("20240121232139_FrogPayDBMigration")]
+    partial class FrogPayDBMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

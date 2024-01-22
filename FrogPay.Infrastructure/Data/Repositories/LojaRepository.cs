@@ -13,14 +13,29 @@ namespace FrogPay.Infrastructure.Data.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IEnumerable<Loja>> ObterTodosAsync()
-        {
-            return await _context.Lojas.ToListAsync();
-        }
-
         public async Task<Loja> ObterPorIdAsync(Guid id)
         {
             return await _context.Lojas.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Loja>> ObterPorNomeFantasiaAsync(string nomeFantasia)
+        {
+            return await _context.Lojas
+                .Where(loja => loja.NomeFantasia.ToLower().Contains(nomeFantasia.ToLower()))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Loja>> ObterPorRazaoSocialAsync(string razaoSocial)
+        {
+            return await _context.Lojas
+                .Where(loja => loja.RazaoSocial.ToLower().Contains(razaoSocial.ToLower()))
+                .ToListAsync();
+        }
+
+        public async Task<Loja> ObterPorCnpjAsync(string cnpj)
+        {
+            return await _context.Lojas
+                .SingleOrDefaultAsync(loja => loja.CNPJ == cnpj);
         }
 
         public async Task AdicionarAsync(Loja loja)
@@ -29,9 +44,10 @@ namespace FrogPay.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task AtualizarAsync(Guid id, Loja loja)
+        public async Task AtualizarAsync(string cnpj, Loja loja)
         {
-            var lojaExistente = await _context.Lojas.FindAsync(id);
+            var lojaExistente = await _context.Lojas
+                .SingleOrDefaultAsync(l => l.CNPJ == cnpj);
 
             if (lojaExistente != null)
             {
@@ -45,15 +61,21 @@ namespace FrogPay.Infrastructure.Data.Repositories
             }
         }
 
-        public async Task RemoverAsync(Guid id)
+        public async Task RemoverAsync(string cnpj)
         {
-            var loja = await _context.Lojas.FindAsync(id);
+            var lojaExistente = await _context.Lojas
+                .SingleOrDefaultAsync(l => l.CNPJ == cnpj);
 
-            if (loja != null)
+            if (lojaExistente != null)
             {
-                _context.Lojas.Remove(loja);
+                _context.Lojas.Remove(lojaExistente);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<IEnumerable<Loja>> ObterTodasAsync()
+        {
+            return await _context.Lojas.ToListAsync();
         }
     }
 }

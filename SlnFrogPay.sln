@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Api", "FrogPay.Api\FrogPay.Api.csproj", "{DA7B4BF7-AD25-4540-B0CB-E5C4CEBB5C48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Api", "FrogPay.Api\FrogPay.Api.csproj", "{DA7B4BF7-AD25-4540-B0CB-E5C4CEBB5C48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Application", "FrogPay.Application\FrogPay.Application.csproj", "{D17B5838-D0E5-4E70-B033-8CBD1E3E4D8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Application", "FrogPay.Application\FrogPay.Application.csproj", "{D17B5838-D0E5-4E70-B033-8CBD1E3E4D8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Domain", "FrogPay.Domain\FrogPay.Domain.csproj", "{1E2F1555-8989-4230-BA08-3024DF24EC7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Domain", "FrogPay.Domain\FrogPay.Domain.csproj", "{1E2F1555-8989-4230-BA08-3024DF24EC7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Infrastructure", "FrogPay.Infrastructure\FrogPay.Infrastructure.csproj", "{1BC89073-83FB-4A0D-B673-E6F9A0B02837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Infrastructure", "FrogPay.Infrastructure\FrogPay.Infrastructure.csproj", "{1BC89073-83FB-4A0D-B673-E6F9A0B02837}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Tests", "FrogPay.Tests\FrogPay.Tests.csproj", "{CBD5F4AB-2EA2-4E23-AB71-89CE5C986EE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Tests", "FrogPay.Tests\FrogPay.Tests.csproj", "{CBD5F4AB-2EA2-4E23-AB71-89CE5C986EE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.Common", "FrogPay.Common\FrogPay.Common.csproj", "{42CC6ED1-615A-40C7-AD25-3093DB062ED0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CBD5F4AB-2EA2-4E23-AB71-89CE5C986EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD5F4AB-2EA2-4E23-AB71-89CE5C986EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD5F4AB-2EA2-4E23-AB71-89CE5C986EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CC6ED1-615A-40C7-AD25-3093DB062ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
