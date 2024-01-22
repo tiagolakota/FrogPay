@@ -17,6 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrogPay.Common", "FrogPay.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrogPay.JwtTokenGenerationConsoleApp", "FrogPay.JwtTokenGenerationConsoleApp\FrogPay.JwtTokenGenerationConsoleApp.csproj", "{7F0DE160-6256-4F8D-82A9-9DC1370C2067}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{0EA594F7-A306-47C6-B5F3-E3BB8600AF52}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
