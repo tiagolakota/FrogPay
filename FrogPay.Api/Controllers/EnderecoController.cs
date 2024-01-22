@@ -52,6 +52,7 @@ namespace FrogPay.API.Controllers
             return Ok(paginaEnderecosDTO);
         }
 
+        [HttpGet("porCpf/{cpf}")]
         public async Task<ActionResult<EnderecoDTO>> ObterPorIdPessoaAsync(string cpf)
         {
             var pessoa = await _pessoaService.ObterPorCpfAsync(cpf);
