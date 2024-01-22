@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="xunit" Version="2.6.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FrogPay.Api\FrogPay.Api.csproj" />
+    <ProjectReference Include="..\FrogPay.Application\FrogPay.Application.csproj" />
+    <ProjectReference Include="..\FrogPay.Common\FrogPay.Common.csproj" />
+    <ProjectReference Include="..\FrogPay.Domain\FrogPay.Domain.csproj" />
+    <ProjectReference Include="..\FrogPay.Infrastructure\FrogPay.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
